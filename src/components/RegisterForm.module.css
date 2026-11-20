@@ -1,0 +1,156 @@
+.registration {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.registration > :global(.page-heading) {
+  margin-bottom: 24px;
+}
+
+.form,
+.userData {
+  display: grid;
+  gap: 18px;
+  padding: 28px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-card);
+}
+
+.field {
+  display: grid;
+  gap: 7px;
+}
+
+.field label,
+.choiceGroup legend {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  min-height: 42px;
+  padding: 9px 11px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font: inherit;
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent-color) 45%, transparent);
+  outline-offset: 1px;
+}
+
+.field [aria-invalid='true'] {
+  border-color: #dc2626;
+}
+
+.choiceGroup {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  border: 0;
+}
+
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+}
+
+.choice {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.choice input {
+  accent-color: var(--accent-color);
+}
+
+.error {
+  color: #dc2626;
+  font-size: 13px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.resetButton {
+  min-height: 40px;
+  padding: 0 16px;
+}
+
+.success {
+  color: var(--accent-color);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.userData {
+  margin-top: 24px;
+}
+
+.userData h2 {
+  font-size: 22px;
+}
+
+.userData dl {
+  display: grid;
+  grid-template-columns: minmax(100px, 0.35fr) minmax(0, 1fr);
+  gap: 10px 16px;
+}
+
+.userData dt {
+  font-weight: 600;
+}
+
+.userData dd {
+  min-width: 0;
+  color: var(--text-secondary);
+  overflow-wrap: anywhere;
+}
+
+.loginPrompt {
+  margin-top: 20px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.loginPrompt a {
+  color: var(--accent-color);
+  font-weight: 600;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .form,
+  .userData {
+    padding: 20px;
+  }
+
+  .userData dl {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .userData dd {
+    margin-bottom: 8px;
+  }
+}

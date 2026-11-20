@@ -1,0 +1,35 @@
+.filterContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filterBtn {
+  min-height: 40px;
+  padding: 0 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-card);
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  transition: color 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.filterBtn:hover:not(:disabled) {
+  border-color: var(--accent-color);
+  background-color: var(--bg-primary);
+  color: var(--accent-color);
+}
+
+.filterBtn.active {
+  background-color: var(--bg-primary);
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.filterBtn:focus-visible {
+  outline: 3px solid rgba(21, 128, 61, 0.25);
+  outline-offset: 2px;
+}

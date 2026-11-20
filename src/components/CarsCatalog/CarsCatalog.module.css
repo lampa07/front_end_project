@@ -1,0 +1,58 @@
+.catalogWrapper {
+  width: 100%;
+}
+
+.searchSortGroup {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.catalogSection {
+  padding: 32px 0;
+  width: 100%;
+}
+
+.controlsBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 28px;
+  background-color: var(--bg-card);
+  padding: 16px 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.controlsGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.carsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.noResults {
+  text-align: center;
+  padding: 48px 16px;
+  background-color: var(--bg-card);
+  border-radius: var(--radius);
+  border: 1px dashed var(--border-color);
+  color: var(--text-secondary);
+}
+
+.noResults h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}

@@ -1,0 +1,83 @@
+.cartPanel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 120;
+  width: min(420px, calc(100vw - 24px));
+  max-height: min(70vh, 560px);
+  overflow-y: auto;
+  padding: 16px;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  box-shadow: var(--shadow-md);
+  text-align: left;
+}
+
+.cartHeader,
+.cartFooter,
+.cartItem,
+.itemActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cartHeader {
+  margin-bottom: 12px;
+}
+
+.cartHeader h2 {
+  color: var(--text-primary);
+  font-size: 18px;
+}
+
+.cartHeader button,
+.itemActions button,
+.cartFooter button {
+  min-height: 36px;
+  padding: 0 12px;
+}
+
+.cartItems {
+  list-style: none;
+}
+
+.cartItem {
+  align-items: flex-start;
+  padding: 12px 0;
+  border-top: 1px solid var(--border-color);
+}
+
+.itemDetails {
+  display: grid;
+  gap: 4px;
+}
+
+.itemDetails span,
+.emptyMessage {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.itemActions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.itemActions span {
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+.itemActions .removeButton,
+.cartFooter button {
+  color: #fff;
+}
+
+.cartFooter {
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+}

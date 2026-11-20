@@ -1,0 +1,124 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--modal-overlay);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.modalContent {
+  background-color: var(--bg-card);
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 550px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+}
+
+.modalHeader {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modalClose {
+  width: 40px;
+  min-height: 40px;
+  padding: 0;
+}
+
+.modalBody {
+  padding: 20px;
+}
+
+.quickviewSummary {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.previewImg {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.colorOptions {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.colorChip {
+  min-height: 40px;
+  padding: 0 12px;
+}
+
+.colorChipSelected {
+  min-height: 40px;
+  padding: 0 12px;
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.optionsGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 12px 0;
+  font-size: 0.85rem;
+}
+
+.promoGroup {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.promoGroup input {
+  flex-grow: 1;
+  padding: 6px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.totalPriceBox {
+  margin-top: 14px;
+  font-size: 1.1rem;
+}
+
+.bookingForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 16px;
+}
+
+.bookingForm input {
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.promoMessage {
+  margin-top: 6px;
+  color: var(--accent-color);
+  font-size: 0.85rem;
+}
