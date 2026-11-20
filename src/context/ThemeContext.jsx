@@ -44,6 +44,7 @@ export function ThemeProvider({ children }) {
   }, [hasManualTheme, isDarkMode]);
 
   useEffect(() => {
+    document.documentElement.classList.toggle('dark-mode', isDarkMode);
     document.body.classList.toggle('dark-mode', isDarkMode);
   }, [isDarkMode]);
 

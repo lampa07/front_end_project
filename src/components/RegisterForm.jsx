@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Container } from './Container/Container';
 import styles from './RegisterForm.module.css';
@@ -15,13 +15,17 @@ const initialFormData = {
 };
 
 const countries = ['Canada', 'Germany', 'Japan', 'United Kingdom', 'United States'];
-const vehicleTypes = ['Electric', 'Sports', 'SUV', 'Sedan', 'Wagon'];
+const equipmentCategories = ['Gaming laptops', 'Monitors', 'Consoles', 'Peripherals', 'Streaming equipment'];
 
 export function RegisterForm() {
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState({});
   const [submittedData, setSubmittedData] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
+
+  useEffect(() => {
+    document.title = 'Create Account | GearRent';
+  }, []);
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
@@ -66,7 +70,7 @@ export function RegisterForm() {
     if (!formData.country) nextErrors.country = 'Please select a country.';
     if (!formData.gender) nextErrors.gender = 'Please select a gender.';
     if (formData.preferredVehicles.length === 0) {
-      nextErrors.preferredVehicles = 'Please select at least one vehicle type.';
+      nextErrors.preferredVehicles = 'Please select at least one equipment category.';
     }
 
     setErrors(nextErrors);
@@ -95,7 +99,7 @@ export function RegisterForm() {
       <Container>
         <section className={styles.registration}>
           <div className="page-heading">
-            <p className="page-eyebrow">DRIVESELECT ACCOUNT</p>
+            <p className="page-eyebrow">GEARRENT ACCOUNT</p>
             <h1>Create your account</h1>
             <p>Fill in your details to get started.</p>
           </div>
@@ -197,18 +201,18 @@ export function RegisterForm() {
             </fieldset>
 
             <fieldset className={styles.choiceGroup} aria-describedby={errors.preferredVehicles ? 'preferredVehicles-error' : undefined}>
-              <legend>Preferred vehicle types</legend>
+              <legend>Preferred Equipment Categories</legend>
               <div className={styles.choices}>
-                {vehicleTypes.map((vehicle) => (
-                  <label className={styles.choice} key={vehicle}>
+                {equipmentCategories.map((category) => (
+                  <label className={styles.choice} key={category}>
                     <input
                       name="preferredVehicles"
                       type="checkbox"
-                      value={vehicle}
-                      checked={formData.preferredVehicles.includes(vehicle)}
+                      value={category}
+                      checked={formData.preferredVehicles.includes(category)}
                       onChange={handleChange}
                     />
-                    {vehicle}
+                    {category}
                   </label>
                 ))}
               </div>
@@ -244,7 +248,7 @@ export function RegisterForm() {
                 <dt>Age</dt><dd>{submittedData.age}</dd>
                 <dt>Country</dt><dd>{submittedData.country}</dd>
                 <dt>Gender</dt><dd>{submittedData.gender}</dd>
-                <dt>Preferred vehicle types</dt><dd>{submittedData.preferredVehicles.join(', ')}</dd>
+                <dt>Preferred equipment categories</dt><dd>{submittedData.preferredVehicles.join(', ')}</dd>
                 <dt>About</dt><dd>{submittedData.about || 'Not provided'}</dd>
               </dl>
               <button className="page-button" type="button" onClick={handleReset}>Clear form</button>

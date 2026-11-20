@@ -3,7 +3,8 @@ import styles from './Navigation.module.css';
 
 const navItems = [
   { label: 'Home', to: '/', end: true },
-  { label: 'Fleet Catalog', to: '/catalog' },
+  { label: 'Equipment Catalog', to: '/catalog' },
+  { label: 'Users', to: '/users' },
   { label: 'About', to: '/about' },
 ];
 

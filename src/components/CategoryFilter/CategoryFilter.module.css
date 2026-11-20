@@ -30,6 +30,6 @@
 }
 
 .filterBtn:focus-visible {
-  outline: 3px solid rgba(21, 128, 61, 0.25);
+  outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
 }

@@ -46,7 +46,7 @@ export const CarsCatalog = ({
         </div>
       ) : (
         <div className={styles.noResults}>
-          <p>No vehicles found matching your criteria.</p>
+          <p>No equipment found matching your criteria.</p>
         </div>
       )}
 

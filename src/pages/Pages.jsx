@@ -11,6 +11,7 @@ import { QuickViewModal } from '../components/QuickViewModal/QuickViewModal';
 import { Container } from '../components/Container/Container';
 import { useAuth, useCart } from '../context/useContexts';
 import { currentUser, initialCars, categoriesList } from '../data/mockData';
+import { formatTenge } from '../utils/formatTenge';
 import './Pages.css';
 
 const sortOptions = ['price-asc', 'price-desc', 'rating-desc'];
@@ -18,7 +19,7 @@ const carsPerPage = 6;
 
 function usePageTitle(title) {
   useEffect(() => {
-    document.title = `${title} | DriveSelect`;
+    document.title = `${title} | GearRent`;
   }, [title]);
 }
 
@@ -42,7 +43,7 @@ export function CatalogPage() {
   const requestedSort = searchParams.get('sort') || sortOptions[0];
   const sortBy = sortOptions.includes(requestedSort) ? requestedSort : sortOptions[0];
   const currentPage = Math.max(1, Number(searchParams.get('page')) || 1);
-  usePageTitle('Fleet Catalog');
+  usePageTitle('Equipment Catalog');
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -70,9 +71,9 @@ export function CatalogPage() {
     <main className="page-shell">
       <Container>
         <div className="page-heading">
-          <p className="page-eyebrow">DRIVESELECT FLEET</p>
-          <h1>Choose your car</h1>
-          <p>Explore available cars and find the right one for your next trip.</p>
+          <p className="page-eyebrow">GEARRENT EQUIPMENT</p>
+          <h1>Find Your Gaming Gear</h1>
+          <p>Explore gaming equipment for your next session, setup, or stream.</p>
         </div>
         <CarsCatalog
           cars={displayedCars}
@@ -103,12 +104,12 @@ export function CarDetailsPage() {
   const { id } = useParams();
   const car = initialCars.find((item) => item.id === Number(id));
   const { addToCart } = useCart();
-  usePageTitle(car?.title || 'Car not found');
+  usePageTitle(car?.title || 'Equipment Not Found');
 
   if (!car) {
     return (
       <main className="page-shell"><Container>
-        <div className="empty-state"><h1>Car not found</h1><Link to="/catalog">Back to fleet catalog</Link></div>
+        <div className="empty-state"><h1>Equipment not found</h1><Link to="/catalog">Back to Equipment</Link></div>
       </Container></main>
     );
   }
@@ -118,11 +119,11 @@ export function CarDetailsPage() {
       <article className="car-details">
         <img src={car.imageUrl} alt={car.title} />
         <div className="car-details-copy">
-          <p className="page-eyebrow">{car.category} · {car.isAvailable ? 'AVAILABLE' : 'CURRENTLY RENTED'}</p>
+          <p className="page-eyebrow">{car.category} · {car.isAvailable ? 'AVAILABLE' : 'UNAVAILABLE'}</p>
           <h1>{car.title}</h1>
           <p>{car.description}</p>
           <p className="detail-rating">{car.rating} / 5 · {car.reviewsCount} reviews</p>
-          <p className="detail-price">${car.pricePerDay}<span> / day</span></p>
+          <p className="detail-price">{formatTenge(car.pricePerDay)}<span> / day</span></p>
           <p>Available colors: {car.colors.join(', ')}</p>
           <div className="page-actions">
             <button
@@ -131,9 +132,9 @@ export function CarDetailsPage() {
               disabled={!car.isAvailable}
               onClick={() => addToCart({ ...car, quantity: 1 })}
             >
-              Add to bookings
+              Add to booking
             </button>
-            <Link className="page-secondary-link" to="/catalog">Back to fleet</Link>
+            <Link className="page-secondary-link" to="/catalog">Back to Equipment</Link>
           </div>
         </div>
       </article>
@@ -144,13 +145,13 @@ export function CarDetailsPage() {
 export function FavoritesPage() {
   const { favorites, toggleFavorite, addToCart } = useCart();
   const favoriteCars = initialCars.filter((car) => favorites.includes(car.id));
-  usePageTitle('Favorite Cars');
+  usePageTitle('Favorite Equipment');
 
   return (
     <main className="page-shell"><Container>
       <div className="page-heading">
         <p className="page-eyebrow">YOUR SHORTLIST</p>
-        <h1>Favorite cars</h1>
+        <h1>Favorite Equipment</h1>
       </div>
       {favoriteCars.length ? (
         <div className="page-car-grid">
@@ -160,9 +161,9 @@ export function FavoritesPage() {
               <div>
                 <p className="page-eyebrow">{car.category}</p>
                 <h2><Link to={`/cars/${car.id}`}>{car.title}</Link></h2>
-                <p>${car.pricePerDay} / day</p>
+                <p>{formatTenge(car.pricePerDay)} / day</p>
                 <div className="page-actions">
-                  <button className="page-button" type="button" disabled={!car.isAvailable} onClick={() => addToCart({ ...car, quantity: 1 })}>Add to bookings</button>
+                  <button className="page-button" type="button" disabled={!car.isAvailable} onClick={() => addToCart({ ...car, quantity: 1 })}>Add to booking</button>
                   <button className="page-text-button" type="button" onClick={() => toggleFavorite(car.id)}>Remove</button>
                 </div>
               </div>
@@ -170,7 +171,7 @@ export function FavoritesPage() {
           ))}
         </div>
       ) : (
-        <div className="empty-state"><p>Your favorites list is empty.</p><Link className="page-button" to="/catalog">Browse the fleet</Link></div>
+        <div className="empty-state"><p>You haven’t saved any gaming equipment to your favorites yet.</p><Link className="page-button" to="/catalog">Browse Equipment</Link></div>
       )}
     </Container></main>
   );
@@ -197,14 +198,14 @@ export function LoginPage() {
   return (
     <main className="page-shell"><Container>
       <form className="page-form" onSubmit={handleSubmit}>
-        <p className="page-eyebrow">DRIVESELECT ACCOUNT</p>
+        <p className="page-eyebrow">GEARRENT ACCOUNT</p>
         <h1>Sign in</h1>
         <label htmlFor="login-name">Name</label>
         <input id="login-name" value={name} onChange={(event) => setName(event.target.value)} autoComplete="name" />
         <button className="page-button" type="submit">Continue</button>
       </form>
       <div className="login-prompt">
-        <p>New to DriveSelect?</p>
+        <p>New to GearRent?</p>
         <Link className="page-button login-register-button" to="/register">Create an account</Link>
       </div>
     </Container></main>
@@ -236,14 +237,14 @@ export function BookingsPage() {
                 <img src={car.imageUrl} alt="" />
                 <div>
                   <strong>{car.title}</strong>
-                  <span>{car.quantity} day(s) · ${car.bookingPricePerDay ?? car.pricePerDay} / day</span>
+                  <span>{car.quantity} day(s) · {formatTenge(car.bookingPricePerDay ?? car.pricePerDay)} / day</span>
                   {car.selectedColor && <span>Color: {car.selectedColor}</span>}
                   {car.customerName && <span>Renter: {car.customerName} · {car.customerPhone}</span>}
                 </div>
-                <strong>${(car.quantity * (car.bookingPricePerDay ?? car.pricePerDay)).toFixed(2)}</strong>
+                <strong>{formatTenge(car.quantity * (car.bookingPricePerDay ?? car.pricePerDay))}</strong>
               </div>
             ))}
-            <p className="booking-total">Total <strong>${totalPrice.toFixed(2)}</strong></p>
+            <p className="booking-total">Total <strong>{formatTenge(totalPrice)}</strong></p>
           </div>
           <div className="checkout-fields">
             <label htmlFor="pickup-date">Pickup date</label>
@@ -252,7 +253,7 @@ export function BookingsPage() {
           </div>
         </form>
       ) : (
-        <div className="empty-state"><p>You have no cars in your bookings yet.</p><Link className="page-button" to="/catalog">Browse the fleet</Link></div>
+        <div className="empty-state"><p>You have no gaming equipment in your bookings yet.</p><Link className="page-button" to="/catalog">Browse Equipment</Link></div>
       )}
     </Container></main>
   );
@@ -265,24 +266,24 @@ export function BookingConfirmedPage() {
     <main className="page-shell"><Container>
       <div className="empty-state confirmation-state">
         <p className="page-eyebrow">BOOKING RECEIVED</p>
-        <h1>Your trip is taking shape.</h1>
+        <h1>Your next gaming session is taking shape.</h1>
         <p>Your booking request has been recorded.</p>
-        <Link className="page-button" to="/catalog">Explore more cars</Link>
+        <Link className="page-button" to="/catalog">Explore more equipment</Link>
       </div>
     </Container></main>
   );
 }
 
 export function AboutPage() {
-  usePageTitle('About DriveSelect');
+  usePageTitle('About GearRent');
 
   return (
     <main className="page-shell"><Container>
       <section className="about-content">
-        <p className="page-eyebrow">ABOUT DRIVESELECT</p>
-        <h1>Good cars. Clear choices.</h1>
-        <p>DriveSelect brings a carefully selected fleet together in one place, with transparent daily rates and the details you need to choose confidently.</p>
-        <Link className="page-button" to="/catalog">View the fleet</Link>
+        <p className="page-eyebrow">ABOUT GEARRENT</p>
+        <h1>Better gear. Better gaming.</h1>
+        <p>GearRent brings gaming laptops, monitors, consoles, and accessories together in one place, with clear daily rates and the details you need to choose confidently.</p>
+        <Link className="page-button" to="/catalog">Explore Equipment</Link>
       </section>
     </Container></main>
   );
@@ -295,7 +296,7 @@ export function NotFoundPage() {
     <main className="page-shell"><Container>
       <div className="empty-state not-found-state">
         <p className="page-eyebrow">404 · ROUTE NOT FOUND</p>
-        <h1>This road ends here.</h1>
+        <h1>This page can’t be found.</h1>
         <p>The page you requested could not be found.</p>
         <Link className="page-button" to="/">Return home</Link>
       </div>

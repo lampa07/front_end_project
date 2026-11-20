@@ -3,7 +3,6 @@ import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import { HeroSection } from './components/HeroSection/HeroSection';
 import { SectionHeader } from './components/SectionHeader/SectionHeader';
 import { CarCard } from './components/CarCard/CarCard';
-import { StatCard } from './components/StatCard/StatCard';
 import { TestimonialCard } from './components/TestimonialCard/TestimonialCard';
 import { QuickViewModal } from './components/QuickViewModal/QuickViewModal';
 import { Container } from './components/Container/Container';
@@ -20,11 +19,13 @@ import {
   LoginPage,
   NotFoundPage,
 } from './pages/Pages';
+import { UsersPage } from './pages/UsersPage';
+import { UserDetailsPage } from './pages/UserDetailsPage';
 
 import {
   initialCars,
-  statsList,
   initialReviews,
+  statsList,
 } from './data/mockData';
 
 import './App.css';
@@ -35,7 +36,7 @@ function HomePage() {
   const [modalState, setModalState] = useState({ isOpen: false, car: null, days: 1 });
 
   useEffect(() => {
-    document.title = 'DriveSelect — Premium Car Rental';
+    document.title = 'GearRent — Gaming Equipment Rentals';
   }, []);
 
   const handleCloseModal = () => {
@@ -43,22 +44,33 @@ function HomePage() {
   };
 
   return (
-    <main>
+    <main className="gear-home">
       <Container>
         <HeroSection
-          heading="Drive the Extraordinary"
-          subheading="Choose from luxury sports cars, comfortable electric sedans, and rugged SUVs."
-          buttonText="Explore Catalog"
+          variant="gear"
+          brand="GearRent"
+          heading="RENT YOUR DREAM SETUP"
+          subheading="Premium gaming gear. Flexible rentals. Better gaming experience."
+          buttonText="Explore Equipment"
           onAction={() => navigate('/catalog')}
+          imageUrl={initialCars[0].imageUrl}
+          imageAlt={initialCars[0].title}
+          benefits={[
+            { title: 'Flexible Rentals', description: 'Choose a rental period that works for you.' },
+            { title: 'Premium Equipment', description: 'Game with quality gear from trusted brands.' },
+            { title: 'Easy Booking', description: 'Reserve your equipment in just a few steps.' },
+          ]}
         />
+      </Container>
 
-        <section id="cars" className="section-padding">
+      <section id="cars" className="gear-home-section">
+        <Container>
           <SectionHeader
-            title="Featured Vehicles"
-            subtitle="A few standouts from the DriveSelect fleet"
+            title="Featured Equipment"
+            subtitle="Explore popular gaming gear, ready for your next session."
           />
           <div className={catalogStyles.carsGrid}>
-            {initialCars.slice(0, 3).map((car) => (
+            {initialCars.slice(0, 6).map((car) => (
               <CarCard
                 key={car.id}
                 car={car}
@@ -68,29 +80,38 @@ function HomePage() {
               />
             ))}
           </div>
-          <div className="featured-catalog-link">
-            <Link className="page-button" to="/catalog">View All Vehicles →</Link>
-          </div>
-        </section>
+        </Container>
+      </section>
 
-        <section id="stats" className="section-padding" style={{ marginTop: '40px' }}>
-          <SectionHeader title="Platform Analytics" subtitle="Live updates on our service performance" />
-          <div className="stats-grid">
-            {statsList.map((st) => (
-              <StatCard key={st.id} {...st} />
-            ))}
+      <section id="reviews" className="gear-home-section gear-reviews">
+        <Container>
+          <div className="gear-rating-summary" aria-label={`GearRent average rating: ${statsList[2].value}`}>
+            <span aria-hidden="true">★★★★★</span>
+            <strong>{statsList[2].value}</strong>
+            <span>average customer rating</span>
           </div>
-        </section>
-
-        <section id="reviews" className="section-padding" style={{ marginTop: '40px' }}>
-          <SectionHeader title="Customer Testimonials" subtitle="Read what our clients say about us" />
-          <div className="reviews-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
+          <SectionHeader
+            title="What Our Customers Say"
+            subtitle="Real experiences from gamers and creators in the GearRent community."
+          />
+          <div className="gear-reviews-grid">
             {initialReviews.map((rev) => (
               <TestimonialCard key={rev.id} {...rev} />
             ))}
           </div>
-        </section>
-      </Container>
+        </Container>
+      </section>
+
+      <section className="gear-cta-section">
+        <Container>
+          <div className="gear-cta">
+            <p className="gear-cta-eyebrow">LEVEL UP YOUR NEXT SESSION</p>
+            <h2>Ready to Upgrade Your Gaming Setup?</h2>
+            <p>Find the gaming equipment you need and rent it on your schedule.</p>
+            <Link className="page-button" to="/catalog">Browse Equipment</Link>
+          </div>
+        </Container>
+      </section>
 
       <QuickViewModal
         isOpen={modalState.isOpen}
@@ -114,6 +135,8 @@ export default function App() {
         <Route path="about" element={<AboutPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<RegisterForm />} />
+        <Route path="users" element={<UsersPage />} />
+        <Route path="users/:id" element={<UserDetailsPage />} />
         <Route element={<ProtectedRoute />}>
           <Route path="bookings" element={<BookingsPage />} />
           <Route path="booking-confirmed" element={<BookingConfirmedPage />} />

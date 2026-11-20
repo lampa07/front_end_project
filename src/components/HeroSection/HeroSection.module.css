@@ -1,6 +1,6 @@
 .heroSection {
-  background: linear-gradient(135deg, var(--accent-color), #14532d);
-  color: #ffffff;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+  color: var(--text-on-accent);
   padding: 60px 32px;
   border-radius: var(--radius);
   margin-top: 24px;
@@ -8,7 +8,7 @@
 }
 
 .heroSection h1 {
-  color: #ffffff;
+  color: var(--text-on-accent);
   font-size: 2.5rem;
   margin-bottom: 12px;
 }
@@ -17,4 +17,163 @@
   font-size: 1.1rem;
   opacity: 0.9;
   margin-bottom: 24px;
+}
+
+.gearHero {
+  margin: 28px 0 0;
+  padding: clamp(28px, 5vw, 64px);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  background:
+    radial-gradient(ellipse at 82% 25%, color-mix(in srgb, var(--accent-color) 18%, transparent), transparent 42%),
+    linear-gradient(125deg, var(--bg-card), var(--bg-primary) 70%, color-mix(in srgb, var(--accent-color) 8%, var(--bg-primary)));
+  text-align: left;
+}
+
+.heroLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 0.78fr);
+  align-items: center;
+  gap: clamp(24px, 5vw, 64px);
+}
+
+.heroCopy {
+  position: relative;
+  z-index: 1;
+}
+
+.gearHero .brandLabel {
+  margin: 0 0 14px;
+  color: var(--accent-color);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.gearHero h1 {
+  max-width: 700px;
+  margin: 0 0 18px;
+  color: var(--text-primary);
+  font-size: clamp(2.4rem, 5vw, 4.5rem);
+  font-weight: 850;
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+}
+
+.gearHero .heroDescription {
+  max-width: 530px;
+  margin: 0 0 28px;
+  color: var(--text-secondary);
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.6;
+  opacity: 1;
+}
+
+.gearHero .heroCopy button {
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.heroVisual {
+  position: relative;
+  display: grid;
+  min-height: 250px;
+  place-items: center;
+  isolation: isolate;
+}
+
+.heroVisual::before {
+  position: absolute;
+  width: min(80%, 330px);
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--accent-color) 20%, transparent);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent-color) 8%, transparent);
+  content: '';
+}
+
+.heroVisual img {
+  position: relative;
+  display: block;
+  width: min(112%, 520px);
+  aspect-ratio: 4 / 3;
+  max-height: 340px;
+  object-fit: contain;
+  filter: drop-shadow(0 22px 34px rgba(0, 0, 0, 0.24));
+  mask-image: radial-gradient(ellipse at center, #000 56%, rgba(0, 0, 0, 0.88) 72%, transparent 100%);
+}
+
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: clamp(28px, 5vw, 56px);
+  padding-top: 22px;
+  border-top: 1px solid var(--border-color);
+}
+
+.benefit {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.benefitNumber {
+  color: var(--accent-color);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.benefit h2 {
+  margin: 0 0 6px;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.benefit p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  opacity: 1;
+}
+
+@media (max-width: 760px) {
+  .gearHero {
+    padding: 32px 24px;
+  }
+
+  .heroLayout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .heroVisual {
+    min-height: 180px;
+    grid-row: 1;
+  }
+
+  .heroVisual img {
+    width: min(100%, 440px);
+    max-height: 220px;
+  }
+
+  .benefits {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+@media (max-width: 420px) {
+  .gearHero {
+    padding: 26px 18px;
+  }
+
+  .gearHero h1 {
+    font-size: 2.25rem;
+  }
 }

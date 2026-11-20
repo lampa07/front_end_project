@@ -14,7 +14,7 @@ export function MainLayout() {
       <Header />
       <Outlet />
       <Footer
-        copyrightText="© 2026 DriveSelect Inc. All rights reserved."
+        copyrightText="© 2026 GearRent. All rights reserved."
         socialLinks={[
           { platform: 'GitHub', url: 'https://github.com' },
           { platform: 'Twitter', url: 'https://twitter.com' },

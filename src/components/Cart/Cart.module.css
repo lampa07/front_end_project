@@ -74,7 +74,7 @@
 
 .itemActions .removeButton,
 .cartFooter button {
-  color: #fff;
+  color: var(--text-on-accent);
 }
 
 .cartFooter {

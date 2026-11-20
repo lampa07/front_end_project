@@ -10,6 +10,6 @@
 
 .progressBar {
   height: 100%;
-  background: var(--accent-color, #15803d);
+  background: var(--accent-color);
   transition: width 0.1s ease-out;
 }

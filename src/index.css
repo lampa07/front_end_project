@@ -42,7 +42,7 @@ button,
   border: 1px solid var(--accent-color);
   border-radius: 6px;
   background: var(--accent-color);
-  color: #fff;
+  color: var(--text-on-accent, #fff);
   font-size: 14px;
   font-weight: 600;
   line-height: 1.2;
@@ -56,7 +56,7 @@ button:hover:not(:disabled),
 .primary-action:hover {
   border-color: var(--accent-hover);
   background: var(--accent-hover);
-  color: #fff;
+  color: var(--text-on-accent, #fff);
 }
 
 button:disabled {

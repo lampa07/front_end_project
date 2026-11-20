@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '../Button/Button';
 import { useCart } from '../../context/useContexts';
+import { formatTenge } from '../../utils/formatTenge';
 import styles from './QuickViewModal.module.css';
 
 export const QuickViewModal = ({ car, days = 1, onClose }) => {
@@ -129,7 +130,7 @@ export const QuickViewModal = ({ car, days = 1, onClose }) => {
           {promoMessage && <p className={styles.promoMessage} role="status">{promoMessage}</p>}
 
           <div className={styles.totalPriceBox}>
-            Total: <strong>${totalPrice.toFixed(2)}</strong>
+            Total: <strong>{formatTenge(totalPrice)}</strong>
           </div>
 
           <form

@@ -93,7 +93,7 @@
   border: 1px solid var(--accent-color);
   border-radius: 6px;
   background: var(--accent-color);
-  color: #fff;
+  color: var(--text-on-accent);
   font: inherit;
   font-size: 14px;
   font-weight: 600;
@@ -103,7 +103,7 @@
 
 .page-button:focus-visible,
 .page-text-button:focus-visible {
-  outline: 3px solid rgba(21, 128, 61, 0.28);
+  outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -126,7 +126,7 @@
 }
 
 .page-text-button {
-  color: #fff;
+  color: var(--text-on-accent);
 }
 
 .page-car-grid {

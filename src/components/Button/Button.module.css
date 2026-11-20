@@ -18,7 +18,7 @@
 
 .primary {
   background-color: var(--accent-color);
-  color: white;
+  color: var(--text-on-accent);
 }
 
 .primary:hover:not(:disabled) {
@@ -39,7 +39,7 @@
 }
 
 .btn:focus-visible {
-  outline: 3px solid rgba(21, 128, 61, 0.28);
+  outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
